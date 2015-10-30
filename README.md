@@ -1,6 +1,6 @@
 # ansible-meteor
 
-A simple provision script to create a Linux machine and run a Meteor project into it.
+A simple provision script to create a Linux machine and run a Meteor project inside it.
 
 The project has been inspired by [this one](https://github.com/westonplatter/example_meteor_deploy), but since it didn't work for me from the beginning, I decided to create another Vagrant machine and provision it with a new series of Ansible scripts.
 
