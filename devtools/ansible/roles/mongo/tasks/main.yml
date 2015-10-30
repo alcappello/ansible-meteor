@@ -1,0 +1,8 @@
+---
+  - name: install MongoDB
+    sudo: yes
+    apt: pkg=mongodb-server state=present
+
+  - name: ensure MongoDB is running
+    sudo: yes
+    service: name=mongodb state=started

@@ -1,0 +1,18 @@
+---
+app_name: ansible-meteor
+deploy_dir: /vagrant
+deploy_app_dir: /vagrant/app
+
+mongo_url: "mongodb://localhost:27017/{{ app_name}}"
+port: 8003
+
+nginx_upstream_name: "{{ app_name }}"
+nginx_upstream_server: "127.0.0.1:{{ port }}"
+
+nginx_server_listen: 0.0.0.0:80
+nginx_server_log: /var/log/nginx/meteor.log
+nginx_server_root: "{{ deploy_app_dir}}"
+nginx_server_index: app.html index.htm
+nginx_server_proxy_pass: "http://{{ app_name }}/"
+
+pid_expression: "/usr/bin/nodejs /usr/lib/node_modules/forever/bin/monitor /var/www/{{ app_name }}/bundle/main.js"

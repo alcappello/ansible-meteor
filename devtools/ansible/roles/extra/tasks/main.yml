@@ -1,0 +1,23 @@
+---
+  - name: copy nginx virtual host file
+    sudo: yes
+    template: src="{{app_name}}.ngx.j2"
+              dest="/etc/nginx/sites-available/{{app_name}}"
+              owner=root
+              group=root
+
+  - name: link nginx virtual host file
+    sudo: yes
+    file: src="/etc/nginx/sites-available/{{app_name}}"
+          dest="/etc/nginx/sites-enabled/{{app_name}}"
+          state=link
+
+  - name: restart nginx
+    sudo: yes
+    service: name=nginx state=restarted
+
+  - name: create a folder in the home directory
+    file: path=/home/vagrant/app/.meteor/local state=directory mode=0777
+
+  - name: create a link to the .meteor folder
+    command: sudo mount --bind /home/vagrant/app/.meteor/local /vagrant/app/.meteor/local
